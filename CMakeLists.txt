@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.5)
 project(pointcloud_divider)
 
 # Enable support for C++17
-if (${CMAKE_VERSION} VERSION_LESS "3.1.0")
+if(${CMAKE_VERSION} VERSION_LESS "3.1.0")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
-else ()
+else()
   set(CMAKE_CXX_STANDARD 17)
-endif ()
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
 
@@ -31,8 +31,11 @@ add_executable(${PROJECT_NAME}_node
 )
 target_link_libraries(${PROJECT_NAME}_node PUBLIC ${YAML_CPP_LIBRARIES} ${PCL_LIBRARIES} -lstdc++fs)
 
+install(TARGETS
+  ${PROJECT_NAME}_node
+  DESTINATION lib/${PROJECT_NAME})
+
 ament_export_include_directories(include)
 ament_export_dependencies(PCL)
 ament_export_libraries(${PROJECT_NAME})
 ament_package()
-
